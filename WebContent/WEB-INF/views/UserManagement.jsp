@@ -35,12 +35,12 @@
      <script src="<c:url value='/static/js/controller/user_controller.js' />"></script>
   </head>
   <body ng-app="myApp" class="ng-cloak">
-      <div class="generic-container" ng-controller="UserController as ctrl">
+      <div  id="div-all" class="generic-container" ng-controller="UserController as ctrl">
           <div class="panel panel-default">
               <div class="panel-heading"><span class="lead">User Registration Form </span></div>
               <div class="formcontainer">
                   <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
-                      <input type="hidden" ng-model="ctrl.user.id" />
+                      <input type="hidden" name="uuuuid" ng-model="ctrl.user.id" />
                       <div class="row">
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="file">Name</label>
@@ -60,7 +60,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="file">phone</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.user.phone" class="form-control input-sm" placeholder="Enter your phone. [This field is validation free]"/>
+                                  <input type="text" ng-model="ctrl.user.phone" name="uphone"  class="form-control input-sm" placeholder="Enter your phone. [This field is validation free]"/>
                               </div>
                           </div>
                       </div>
@@ -88,7 +88,7 @@
 
                       <div class="row">
                           <div class="form-actions floatRight">
-                              <input type="submit"  value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
+                              <input type="submit"  id ="dttd" value="{{!ctrl.user.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid">
                               <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
                           </div>
                       </div>
@@ -116,7 +116,7 @@
                               <td><span ng-bind="u.phone"></span></td>
                               <td><span ng-bind="u.sex"></span></td>
                               <td>
-                              <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
+                              <button type="button" value='{{u.id}}u' ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" value={{u.id}} ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Remove</button>
                               </td>
                           </tr>
                       </tbody>
