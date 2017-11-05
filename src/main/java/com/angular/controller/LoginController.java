@@ -24,7 +24,17 @@ public class LoginController {
     @RequestMapping(value="/user")
     public ModelAndView usr( HttpServletRequest request, HttpServletResponse response){
 		System.out.println("~~~~~~~~~~~~~");
+		//ModelAndView rw = new ModelAndView("UserManagement");
+		ModelAndView rw = new ModelAndView("index");
+        return rw;
+    }
+	
+	@ResponseBody
+    @RequestMapping(value="/users")
+    public ModelAndView usrs( HttpServletRequest request, HttpServletResponse response){
+		System.out.println("~~~~~~~~~~~~~");
 		ModelAndView rw = new ModelAndView("UserManagement");
+		
         return rw;
     }
 
