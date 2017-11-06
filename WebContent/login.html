@@ -60,7 +60,7 @@
 	  $scope.login = function(){
 		  $http({
 			  method: 'POST',
-              url: 'http://localhost:8081/Angular/user/login',
+              url: 'http://localhost:8081/Angular/login/logins',
               data: $.param($scope.user),
               headers: {
                   'Content-Type': 'application/x-www-form-urlencoded'

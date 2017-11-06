@@ -30,19 +30,7 @@ import main.java.com.angular.service.IUserService;
 public class UserController{
     @Resource
     private IUserService userService;
-    
-    @ResponseBody
-    @RequestMapping(value="/login", method = RequestMethod.POST)
-    public Map<String,Object> login( UserEntity user){
-    	System.out.println("user--kg");
-    	System.out.println(user.getName()+user.getPassword());
-        Map<String,Object> map = new HashMap<String,Object>();
-        //System.out.println(user.toString());
-        boolean loginResult = userService.isExist(user);
-        map.put("loginResult", loginResult);
-        return map;
-    }
-    
+       
     @ResponseBody
     @RequestMapping(value="/uadd", method = RequestMethod.POST)
     public boolean act(@RequestBody UserEntity user){

@@ -13,7 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="description" content="this is my page">
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     
-    <link rel="stylesheet" type="text/css" href="./css/bootstrap-3.2.0/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="http://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="http://cdn.bootcss.com/angular.js/1.3.15/angular.min.js"></script>
@@ -26,21 +27,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
     </style>
   </head>
-  <body ng-app="app">
+  <body ng-app="app" style="background:url(<c:url value='/static/images/1.png'/>) no-repeat;">
 	<nav class="navbar navbar-default navbar-fixed-top">
 	  <div class="container">
 			<ul class="nav navbar-nav">
 				<li>
 					<c:if test="${name!=null}">
 						<a href="###">
-							欢迎${name}
+							welcome${name}
 						</a>
 					</c:if>
 				</li>
-	           <li><a href="./index.do">首页</a></li>
-	           <li><a href="./detail.do">类型页</a></li>
-	           <li><a href="./cart.do">购物车</a></li>
-	           <li><a href="./user.do">用户信息</a></li>
+	                <li><a href="<%=basePath%>orders/index">index</a></li>
+					<li><a href="<%=basePath%>comm/detail">types</a></li>
+					<li><a href="<%=basePath%>comm/cart"> cart </a></li>
+					<li><a href="<%=basePath%>comm/list"> billing </a></li>
+					<li><a href="<%=basePath%>login/users">users</a></li>
 	         </ul>
 	  </div>
 	</nav>

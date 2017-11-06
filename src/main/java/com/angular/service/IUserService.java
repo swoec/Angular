@@ -16,4 +16,5 @@ public interface IUserService {
     public List fetchUser();
     public boolean updateUser(int id,UserEntity user);
     public boolean delUser(int id);
+    public UserEntity searchuser(UserEntity user);
 }

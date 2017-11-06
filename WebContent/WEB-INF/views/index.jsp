@@ -67,17 +67,17 @@
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<div class="thumbnail pull-left com" ng-repeat="com in coms">
-						<img ng-src="{{com.img}}" class="img-rounded" width="40"
+						<img ng-src="<%=basePath%>{{com.img}}" class="img-rounded" width="40"
 							height="40">
 						<div class="caption">
 							<h3>{{com.name}}</h3>
 							<p>{{com.depict}}</p>
 							<p>
 								<a href="#" class="btn btn-primary" role="button"
-									ng-click="addToCart(com.id)">add</a>
+									ng-click="addToCart(com.id)">add   </a>
 							</p>
 							<p>
-								<button class="btn btn-default" ng-click="showDetail(com)">
+								<button class="btn btn-info" ng-click="showDetail(com)">
 									details</button>
 							</p>
 						</div>
@@ -173,10 +173,10 @@
 
 		var ajaxModule = {
 			getAllCom : function(cb) {
-				$.post("admin/getAllCom.do", cb);
+				$.post("<%=basePath%>comm/alllist", cb);
 			},
 			addOrder : function(userId, commodityIds, cb) {
-				$.post("addOrder.do", {
+				$.post("<%=basePath%>comm/addorderlist", {
 					userId : userId,
 					commodityIds : commodityIds,
 					commodityCounts : "1"
@@ -191,12 +191,10 @@
 				});
 			},
 			getCommentById : function(id, cb) {
-				$.post("admin/getCommentById.do", {
-					commodityId : id
-				}, cb);
+				$.post("<%=basePath%>comm/detail/"+id, cb);
 			},
 			addComment : function(commodityID, comment, cb) {
-				$.post("./addComment.do", {
+				$.post("<%=basePath%>comm/comment/add/", {
 					userId : '${id}',
 					userName : '${name}',
 					commodityID : commodityID,

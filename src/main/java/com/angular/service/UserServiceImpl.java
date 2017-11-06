@@ -50,4 +50,10 @@ public class UserServiceImpl implements IUserService {
 		// TODO Auto-generated method stub
 		return userDao.delUser(id);
 	}
+
+	@Override
+	public UserEntity searchuser(UserEntity user) {
+		// TODO Auto-generated method stub
+		return userDao.getUser(user);
+	}
 }

@@ -97,5 +97,18 @@ public class UserDaoImpl implements IUserDao {
 		          return true;
 		else return false;
 		
+	}
+
+	@Override
+	public UserEntity getUser(UserEntity user) {
+		// TODO Auto-generated method stub
+		 Session session = this.getSession();
+	        String hql = "from UserEntity where name =? and password = ?";
+	        Query query = session.createQuery(hql);
+	        query.setString(0, user.getName());
+	        query.setString(1, user.getPassword());
+	        if (query.list().size() >= 1) 
+	             return (UserEntity) query.list().get(0);
+	        else return null;
 	}   
 }

@@ -16,5 +16,6 @@ public interface IUserDao {
     public List<UserEntity> fetchUser();
     public boolean delUser(int id);
     public boolean updateUser(int id,UserEntity user);
+    public UserEntity getUser(UserEntity user);
     
 }
