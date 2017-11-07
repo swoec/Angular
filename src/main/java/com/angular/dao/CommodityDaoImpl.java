@@ -78,6 +78,20 @@ public class CommodityDaoImpl implements ICommodityDao {
         else
 		    return false;
 	}
+
+	@Override
+	public List<CommodityEntity> searchComm(String keyword) {
+		// TODO Auto-generated method stub
+		Session session = this.getSession();
+		//String hql = "select * from CommodityEntity where name like '%"+keyword+"%' union( select * from CommodityEntity where depict like '%"+keyword+"%')";
+		String search ="from CommodityEntity where name like '%"+keyword+"%' or depict like '%"+keyword+"%')";
+        Query query = session.createQuery(search);
+        //query.setString(0, keyword);
+
+        return query.list();
+		
+		
+	}
     
 
 }

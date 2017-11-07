@@ -53,36 +53,36 @@
 			<ul class="list-group">
 				<li class="list-group-item pull-left commodity"
 					ng-repeat="order in list">
-					<p>商品</p>
+					<p>product</p>
 					<div commodity-directive id="{{order.commodityId}}">
-						<p>商品名{{res.name}}</p>
-						<p>商品描述{{res.depict}}</p>
-						<p>商品厂商{{res.manufacturer}}</p>
-						<p>商品价格{{res.price}}</p>
+						<p>name:{{res.name}}</p>
+						<p>desc:{{res.depict}}</p>
+						<p>manu:{{res.manufacturer}}</p>
+						<p>price:{{res.price}}</p>
 						<p>
-							商品logoï<img ng-src={{res.img}} width=50 height=50 />
+							<img ng-src="<%=basePath%>{{com.img}}" width=50 height=50 />
 						</p>
 						<p>
-							购买商品个数 <span class="badge"> {{order.commodityCount}} </span>
+							total: <span class="badge"> {{order.commodityCount}} </span>
 						<p style="display: none">{{order.price=res.price}}</p>
 						</p>
 						<button class="btn btn-danger"
-							ng-click="comCount(-1, order.commodityId)">少买一个</button>
+							ng-click="comCount(-1, order.commodityId)">one less</button>
 						<button class="btn btn-warning"
-							ng-click="comCount(1, order.commodityId)">再来一个</button>
+							ng-click="comCount(1, order.commodityId)">one more</button>
 					</div>
 				</li>
 			</ul>
 			<div class="clearfix">
-				<p>总金额{{sum}}</p>
+				<p>account:{{sum}}</p>
 			</div>
 			<input type="hidden" value="${id}" class="form-control" id="userId">
-			<br> <label class="clearfix"> 输入用户地址 <input type="text"
+			<br> <label class="clearfix"> addr: <input type="text"
 				class="form-control" id="address">
-			</label> <br> <label class="clearfix"> 输入收货人手机 <input
+			</label> <br> <label class="clearfix"> phone: <input
 				type="number" class="form-control" id="phone">
 			</label> <br>
-			<button id="submit" class="btn btn-success">提交信息 </button>
+			<button id="submit" class="btn btn-success">submit </button>
 		</div>
 	</div>
 
@@ -154,9 +154,9 @@
 				orderList : JSON.stringify($("#cart").scope().list)
 			}, function(res) {
 				if (res === true) {
-					location.href = "/comm/list";
+					location.href = "<%=basePath%>comm/list";
 				} else {
-					alert("购买失败");
+					alert("error");
 				}
 				;
 			});

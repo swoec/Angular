@@ -56,8 +56,8 @@
 		<div class="row">
 			<p>
 				<span class="glyphicon glyphicon-cd" aria-hidden="true"></span> <input
-					class="form-control" id="keyword" placeholder="输入搜索关键词"><br>
-				<button id="search" class="btn btn-primary">搜索</button>
+					class="form-control" id="keyword" placeholder="keyword"><br>
+				<button id="search" class="btn btn-primary">search</button>
 			</p>
 		</div>
 		<div id="groups" class="row" ng-controller="groups">
@@ -72,23 +72,23 @@
 						<p>{{com.name}}</p>
 					</div>
 					<div class="panel-body">
-						<p>产品介绍{{com.depict}}</p>
-						<p>厂商{{com.manufacturer}}</p>
-						<p>金额{{com.price}}</p>
+						<p>{{com.depict}}</p>
+						<p>manu:{{com.manufacturer}}</p>
+						<p>price:{{com.price}}</p>
 						<p>
-							产品图片<img ng-src={{com.img}} width=50 height=50 />
+							<img ng-src="<%=basePath%>{{com.img}}" width=50 height=50 />
 						</p>
 						<button class="btn btn-default" ng-click="addToCart(com.id)">
-							添加到购物测 </button>
+							add to cart </button>
 						<button class="btn btn-default" ng-click="showDetail(com)">
-							查看详细</button>
+							detail</button>
 					</div>
 				</div>
 				<div class="clearfix "></div>
 			</div>
 		</div>
 		<div class="row">
-			<a href="./cart.do" class="btn btn-default" role="button">去结账</a>
+			<a href="<%=basePath%>comm/cart?id=${id}&name=${name}" class="btn btn-default" role="button">cart</a>
 		</div>
 	</div>
 
@@ -102,15 +102,15 @@
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">产品信息</h4>
+					<h4 class="modal-title" id="myModalLabel">information</h4>
 				</div>
 				<div class="modal-body">
-					<p>产品名字{{com.name}}</p>
-					<p>产品描述{{com.depict}}</p>
-					<p>产品公司{{com.manufacturer}}</p>
-					<p>æ产品金额{{com.price}}</p>
+					<p>{{com.name}}</p>
+					<p>{{com.depict}}</p>
+					<p>{{com.manufacturer}}</p>
+					<p>{{com.price}}</p>
 					<p>
-						产品缩略图<img ng-src={{com.img}} width=50 height=50 />
+					  <img ng-src="<%=basePath%>{{com.img}}" width=50 height=50 />
 					</p>
 					<div class="commentBody">
 						<div ng-repeat="c in comments">
@@ -120,9 +120,9 @@
 						</div>
 						<form>
 							<label for="text"></label> <input type="text" name="text"
-								id="text" placehoder="评论内容" ng-model="comment" />
+								id="text" placehoder="comment" ng-model="comment" />
 							<button id="submit" class="btn btn-success"
-								ng-click="appendComment(com.id)">评论</button>
+								ng-click="appendComment(com.id)">comment</button>
 						</form>
 					</div>
 				</div>
@@ -219,35 +219,33 @@
 	var ajaxModule = {
 
 		getAllCom : function(cb) {
-			$.post("admin/getAllCom.do", cb);
+			$.post("<%=basePath%>comm/alllist", cb);
 		},
 		addOrder : function(userId, commodityIds, cb) {
-			$.post("addOrder.do", {
+			$.post("<%=basePath%>orders/addorderlist", {
 				userId : userId,
 				commodityIds : commodityIds,
 				commodityCounts : "1"
 			}, function(res) {
 				console.log("addOrder.do response is " + res);
 				if (res) {
-					alert("添加成功");
+					alert("added");
 				} else {
-					alert("添加失败");
+					alert("error");
 				}
 				;
 			});
 		},
 		search : function(keyword, cb) {
-			$.post("search.do", {
+			$.post("<%=basePath%>comm/search", {
 				keyword : keyword
 			}, cb);
 		},
 		getCommentById : function(id, cb) {
-			$.post("admin/getCommentById.do", {
-				commodityId : id
-			}, cb);
+			$.post("<%=basePath%>comm/detail/"+id, cb);
 		},
 		addComment : function(commodityID, comment, cb) {
-			$.post("./addComment.do", {
+			$.post("<%=basePath%>comm/comment/add/", {
 				userId : '${id}',
 				userName : '${name}',
 				commodityID : commodityID,
@@ -256,7 +254,7 @@
 				if (res) {
 					cb && cb();
 				} else {
-					alert("评论添加失败");
+					alert("error");
 				}
 			});
 		}

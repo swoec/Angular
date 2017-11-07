@@ -86,7 +86,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<a href="<%=basePath%>cart.do" class="btn btn-default" role="button">to
+			<a href="<%=basePath%>comm/cart?id=${id}&name=${name}" class="btn btn-default" role="button">to
 				cart</a>
 		</div>
 	</div>
@@ -105,12 +105,12 @@
 					<h4 class="modal-title" id="myModalLabel">product details</h4>
 				</div>
 				<div class="modal-body">
-					<p>name{{com.name}}</p>
-					<p>desc{{com.depict}}</p>
-					<p>manufacture{{com.manufacturer}}</p>
-					<p>price{{com.price}}</p>
+					<p>name:  {{com.name}}</p>
+					<p>desc:  {{com.depict}}</p>
+					<p>manufacture:  {{com.manufacturer}}</p>
+					<p>price:  {{com.price}}</p>
 					<p>
-						<img ng-src={{com.img}} width=50 height=50 />
+						<img ng-src="<%=basePath%>{{com.img}}" width=50 height=50 />
 					</p>
 					<div class="commentBody">
 						<div ng-repeat="c in comments">
@@ -132,7 +132,8 @@
 	<!-- Modal ---end  -->
 
 	<script>
-		var userId = "${id}";
+		var userId = ${id};
+		
 		var app = angular.module("app", []);
 
 		app.controller("index", function($scope) {
@@ -176,7 +177,7 @@
 				$.post("<%=basePath%>comm/alllist", cb);
 			},
 			addOrder : function(userId, commodityIds, cb) {
-				$.post("<%=basePath%>comm/addorderlist", {
+				$.post("<%=basePath%>orders/addorderlist", {
 					userId : userId,
 					commodityIds : commodityIds,
 					commodityCounts : "1"

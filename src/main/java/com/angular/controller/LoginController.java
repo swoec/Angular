@@ -49,6 +49,7 @@ public class LoginController {
         	HttpSession session = request.getSession(true);
             session.setAttribute("name", users.getName());
     		session.setAttribute("id", users.getId());
+    		
     		 loginResult=true;
         }    
         map.put("loginResult", loginResult);

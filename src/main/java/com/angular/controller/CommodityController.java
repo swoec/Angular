@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,6 +30,10 @@ public class CommodityController {
     @RequestMapping(value="/detail")
     public ModelAndView usrs( HttpServletRequest request, HttpServletResponse response){
 		System.out.println("~~~~~~~~~~~~~");
+		HttpSession session = request.getSession(true);
+		System.out.println(request.getParameter("name")+"------detail----"+request.getParameter("id"));
+        session.setAttribute("name", request.getParameter("name"));
+		session.setAttribute("id", request.getParameter("id"));
 		ModelAndView rw = new ModelAndView("detail");
 		
         return rw;
@@ -39,6 +44,10 @@ public class CommodityController {
     @RequestMapping(value="/cart")
     public ModelAndView cart( HttpServletRequest request, HttpServletResponse response){
 		System.out.println("~~~~~~~~~~~~~");
+		HttpSession session = request.getSession(true);
+		System.out.println(request.getParameter("name")+"------cart----"+request.getParameter("id"));
+        session.setAttribute("name", request.getParameter("name"));
+		session.setAttribute("id", request.getParameter("id"));
 		ModelAndView rw = new ModelAndView("cart");
 		
         return rw;
@@ -49,6 +58,10 @@ public class CommodityController {
     @RequestMapping(value="/list")
     public ModelAndView list( HttpServletRequest request, HttpServletResponse response){
 		System.out.println("~~~~~~~~~~~~~");
+		HttpSession session = request.getSession(true);
+		System.out.println(request.getParameter("name")+"------list----"+request.getParameter("id"));
+        session.setAttribute("name", request.getParameter("name"));
+		session.setAttribute("id", request.getParameter("id"));
 		ModelAndView rw = new ModelAndView("list");
 		
         return rw;
@@ -66,19 +79,29 @@ public class CommodityController {
 	
 	@ResponseBody
     @RequestMapping(value="/alllist" ,method = RequestMethod.POST)
-    public List<CommodityEntity> getAllcomm(){
+    public List<CommodityEntity> getAllcomm(HttpServletRequest request, HttpServletResponse response){
 		System.out.println("~~~~~~~~~~~~~");
+		HttpSession session = request.getSession(true);
+		System.out.println(request.getParameter("name")+"------cart----"+request.getParameter("id"));
+        session.setAttribute("name", request.getParameter("name"));
+		session.setAttribute("id", request.getParameter("id"));
 		return commService.getAllComm();
-		//ModelAndView rw = new ModelAndView("list");
-		
-       // return rw;
+	
     }
 	
+	@ResponseBody
+    @RequestMapping(value="/search" ,method = RequestMethod.POST)
+    public List<CommodityEntity> searchcomm(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("~~~~~~~~~~~~~");
+		String keyword =request.getParameter("keyword");
+		return commService.searchComm(keyword);
+		
+    }	
 	
 	@ResponseBody
     @RequestMapping(value="/comment/{id}" ,method = RequestMethod.POST)
     public List<CommentEntity> getcommentbyId( @PathVariable("id") int id){
-		System.out.println("~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~comment~~~~~~"+id);
 		return commService.getCommentbyId(id);
 		
     }

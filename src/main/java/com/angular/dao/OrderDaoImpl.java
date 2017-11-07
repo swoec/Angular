@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import main.java.com.angular.model.OrderEntity;
 import main.java.com.angular.model.OrderlistEntity;
 
 @Component
@@ -60,27 +61,77 @@ public class OrderDaoImpl implements IOrderDao {
 		// TODO Auto-generated method stub
 		Session session = this.getSession();
 		String hql = "from OrderlistEntity where userId =? and commodityId =?";
+		
 		Query query = session.createQuery(hql);
+		query.setInteger(0, userId);
+		query.setInteger(1, Integer.parseInt(commodityId));	
 		if(0==query.list().size()){
 			String ihql ="insert into orderlist(UID,CID,CCOUNT) values(?,?,?)";
-			query.setInteger(0, userId);
-			query.setInteger(0, Integer.parseInt(commodityId));
-			query.setInteger(0, Integer.parseInt(commodityCount));
+			
 			Query insert = session.createSQLQuery(ihql);
+			insert.setInteger(0, userId);
+			insert.setInteger(1, Integer.parseInt(commodityId));
+			insert.setInteger(2, Integer.parseInt(commodityCount));
 			if(1==insert.executeUpdate())
 			     return true;
 			else return false;
 		}else {
-			OrderlistEntity order =(OrderlistEntity)query.list();
-			commodityCount+=order.getCommodityCount();
+			OrderlistEntity order =(OrderlistEntity)query.list().get(0);
+			int count =Integer.parseInt(commodityCount)+order.getCommodityCount();
 		
-			String uhql = "update orderlist set CCOUNT=? where UID="+userId+"and CID="+commodityId;
-			query.setInteger(0, Integer.parseInt(commodityCount));
+			String uhql = "update orderlist set CCOUNT=? where UID="+userId+" and CID="+commodityId;			
 			Query update = session.createSQLQuery(uhql);
+			update.setInteger(0, count);
 			if(1==update.executeUpdate())
 				 return true;
 			else return false;
 		}
+		
+	}
+
+	@Override
+	public List<OrderEntity> getOrdersById(int userid) {
+		// TODO Auto-generated method stub
+		Session session = this.getSession();
+        String hql = "from OrderEntity where userId =?";
+        Query query = session.createQuery(hql);
+        query.setInteger(0, userid);
+        
+        return query.list();
+	}
+
+	@Override
+	public List<OrderEntity> getAllOrdersById() {
+		// TODO Auto-generated method stub
+		Session session = this.getSession();
+        String hql = "from OrderEntity ";
+        Query query = session.createQuery(hql);
+        
+        
+        return query.list();
+	}
+
+	@Override
+	public List<OrderEntity> getSOrdersById(int userid, int flag) {
+		// TODO Auto-generated method stub
+		Session session = this.getSession();
+        String hql = "from OrderEntity where userId =?"+" and pay=?";
+        Query query = session.createQuery(hql);
+        query.setInteger(0, userid);
+        query.setInteger(1, flag);
+        return query.list();
+	}
+
+	@Override
+	public boolean setOrdersStatus(int userid, int orderid) {
+		// TODO Auto-generated method stub
+		Session session = this.getSession();
+		String uhql = "update orders set IPAY=? where UID="+userid+" and ORDID="+orderid;			
+		Query update = session.createSQLQuery(uhql);
+		update.setInteger(0, 1);
+		if(1==update.executeUpdate())
+			 return true;
+		else return false;
 		
 	}
 

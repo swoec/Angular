@@ -48,31 +48,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</nav>
 	<div id="form" class="container margin80" ng-controller="form">
 		<div class="row">
-			<h1>未支付列表</h1>
+			<h1>unpaid</h1>
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="item in items" ng-if="item.pay==0">
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							收货人地址{{item.address}}
+							ADDR:{{item.address}}
 						</p>
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							收货人手机{{item.phone}}
+							PHONE:{{item.phone}}
 						</p>
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							商品总价格{{item.totalPrice}}
+							PRICE:{{item.totalPrice}}
 						</p>
 						<div parse id={{item.orderlist}}>
 							<div class="list pull-left" ng-repeat="order in  orderlist">
 			        			<div commodity-directive id="{{order.commodityId}}">
-			        				<p>商品名{{res.name}}</p>
-			        				<p>商品描述{{res.depict}}</p>
-			        				<p>商品厂商{{res.manufacturer}}</p>
-			        				<p>商品价格{{res.price}}</p>
-			        				<p>商品logo<img ng-src={{res.img}}  width=50 height=50/></p>
+			        				<p>name:{{res.name}}</p>
+			        				<p>desc:{{res.depict}}</p>
+			        				<p>manu:{{res.manufacturer}}</p>
+			        				<p>price:{{res.price}}</p>
+			        				<p><img ng-src="<%=basePath%>{{com.img}}"  width=50 height=50/></p>
 				        			<p>
-				        				购买的商品个数
+				        				total:
 					        			<span class="badge">
 					        				{{order.commodityCount}}
 										</span>
@@ -81,36 +81,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        		</div>
 		        		</div>
 		        	
-		        		<button class="btn btn-default" ng-click="pay(item.id)"> 支付 </button>
+		        		<button class="btn btn-default" ng-click="pay(item.id)"> pay</button>
 	        		<div class="clearfix"></div>
 				</li>
 			</ul>
 			<br>
-			<h1>已支付列表</h1>
+			<h1>paid</h1>
 			<ul>
 				<li class="list-group-item" ng-repeat="item in items" ng-if="item.pay==1">
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							收货人地址{{item.address}}
+							ADDR:{{item.address}}
 						</p>
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							收货人手机{{item.phone}}
+							PHONE:{{item.phone}}
 						</p>
 						<p>
 							<span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
-							商品总价格{{item.totalPrice}}
+							PRICE:{{item.totalPrice}}
 						</p>
 						<div parse id={{item.orderlist}}>
 							<div class="list pull-left" ng-repeat="order in  orderlist">
 			        			<div commodity-directive id="{{order.commodityId}}">
-			        				<p>商品名{{res.name}}</p>
-			        				<p>商品描述{{res.depict}}</p>
-			        				<p>商品厂商{{res.manufacturer}}</p>
-			        				<p>商品价格{{res.price}}</p>
-			        				<p>商品logo<img ng-src={{res.img}}  width=50 height=50/></p>
+			        				<p>name:{{res.name}}</p>
+			        				<p>desc:{{res.depict}}</p>
+			        				<p>manu:{{res.manufacturer}}</p>
+			        				<p>price:{{res.price}}</p>
+			        				<p><img ng-src="<%=basePath%>{{com.img}}"  width=50 height=50/></p>
 				        			<p>
-				        				购买的商品个数
+				        				account:
 					        			<span class="badge">
 					        				{{order.commodityCount}}
 										</span>
@@ -156,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					if(res) {
 						location.reload();
 					}else{
-						alert("支付失败");
+						alert("error");
 					};
 				});
 			};
@@ -164,13 +164,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		var ajaxModule = {
 			getFormList : function( userId,  cb ) {
-				$.post("getFormList.do",{userId:userId}, cb);
+				$.post("<%=basePath%>orders/getorders",{userId:userId}, cb);
 			},
 			pay : function( userId, orderformId, cb) {
-				$.post("pay.do", {userId : userId, orderformId : orderformId }, cb);
+				$.post("<%=basePath%>orders/setorders", {userId : userId, orderId : orderformId }, cb);
 			},
 			getComById : function(id , cb) {
-        		$.post("./getComById.do", {id:id}, cb);
+        		$.post("<%=basePath%>comm/detail/"+id, cb);
 			}
 		};
 		

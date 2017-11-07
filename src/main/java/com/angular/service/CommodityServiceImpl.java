@@ -42,5 +42,11 @@ public class CommodityServiceImpl implements ICommodityService {
 		return commdao.addCommentbyId(userId, commodityID, userName, comment);
 	}
 
+	@Override
+	public List<CommodityEntity> searchComm(String keyword) {
+		// TODO Auto-generated method stub
+		return commdao.searchComm(keyword);
+	}
+
 	
 }
