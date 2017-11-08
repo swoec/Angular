@@ -62,7 +62,7 @@ public class OrderEntity {
 	public void setPay(int pay) {
 		this.pay = pay;
 	}
-	@Column(name = "ORDLIST", nullable = false, length = 80)
+	@Column(name = "ORDLIST", nullable = false, length = 400)
 	public String getOrderlist() {
 		return orderlist;
 	}

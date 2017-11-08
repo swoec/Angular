@@ -192,7 +192,7 @@
 				});
 			},
 			getCommentById : function(id, cb) {
-				$.post("<%=basePath%>comm/detail/"+id, cb);
+				$.post("<%=basePath%>comm/comment/"+id, cb);
 			},
 			addComment : function(commodityID, comment, cb) {
 				$.post("<%=basePath%>comm/comment/add/", {

@@ -40,7 +40,7 @@
 			<div class="row">
 				<ul class="nav navbar-nav">
 					<li><c:if test="${name!=null}">
-							<a href="###"> welcome${name} </a>
+							<a href="###"> welcome ${name} </a>
 						</c:if></li>
 					<li><a href="<%=basePath%>orders/index">index</a></li>
 					<li><a href="<%=basePath%>comm/detail">types</a></li>
@@ -242,7 +242,8 @@
 			}, cb);
 		},
 		getCommentById : function(id, cb) {
-			$.post("<%=basePath%>comm/detail/"+id, cb);
+			
+			$.post("<%=basePath%>comm/comment/"+id, cb);
 		},
 		addComment : function(commodityID, comment, cb) {
 			$.post("<%=basePath%>comm/comment/add/", {

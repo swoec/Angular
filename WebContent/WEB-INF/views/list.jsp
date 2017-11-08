@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<li>
 					<c:if test="${name!=null}">
 						<a href="###">
-							welcome${name}
+							welcome ${name}
 						</a>
 					</c:if>
 				</li>
@@ -166,7 +166,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			getFormList : function( userId,  cb ) {
 				$.post("<%=basePath%>orders/getorders",{userId:userId}, cb);
 			},
-			pay : function( userId, orderformId, cb) {
+			pay : function( orderformId, cb) {
 				$.post("<%=basePath%>orders/setorders", {userId : userId, orderId : orderformId }, cb);
 			},
 			getComById : function(id , cb) {

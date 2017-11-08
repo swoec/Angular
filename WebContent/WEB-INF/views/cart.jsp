@@ -37,7 +37,7 @@
 			<div class="row">
 				<ul class="nav navbar-nav">
 					<li class="text-success"><c:if test="${name!=null}">
-							<a href="###"> welcome${name} </a>
+							<a href="###"> welcome ${name} </a>
 						</c:if></li>
 					<li><a href="<%=basePath%>orders/index">index</a></li>
 					<li><a href="<%=basePath%>comm/detail">types</a></li>
@@ -96,7 +96,7 @@
 				restrict : "EA",
 				scope : true,
 				link : function($scope, $el, $iattrs) {
-					$.put("<%=basePath%>comm/detail/"+id,function(res) {
+					$.post("<%=basePath%>comm/detail/"+userId,function(res) {
 						$scope.res = res[0];
 						$scope.$apply();
 					});

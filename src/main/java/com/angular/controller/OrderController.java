@@ -30,10 +30,7 @@ public class OrderController {
     @RequestMapping(value="/index")
     public ModelAndView usrs( HttpServletRequest request, HttpServletResponse response){
 		System.out.println("~~~~~~~~~~~~~");
-		HttpSession session = request.getSession(true);
-		System.out.println(request.getParameter("name")+"------index----"+request.getParameter("id"));
-        session.setAttribute("name", request.getParameter("name"));
-		session.setAttribute("id", request.getParameter("id"));
+		
 		ModelAndView rw = new ModelAndView("index");
 		
         return rw;
@@ -101,12 +98,12 @@ public class OrderController {
 	@ResponseBody
 	public boolean setorders( HttpServletRequest request, HttpServletResponse response) {
 		int userId =0;
-		if(null!=request.getSession().getAttribute("id")){
-			 userId = Integer.parseInt(request.getSession().getAttribute("id").toString());
+		if(null!=request.getParameter("userId")){
+			 userId = Integer.parseInt(request.getParameter("userId"));
 		}
 		int orderid=0;
-		if(null !=request.getAttribute("orderId")){
-			orderid =Integer.parseInt(request.getAttribute("orderId").toString());
+		if(null !=request.getParameter("orderId")){
+			orderid =Integer.parseInt(request.getParameter("orderId"));
 		}
 		return orderservice.setOrdersStatus(userId, orderid);
 	}
