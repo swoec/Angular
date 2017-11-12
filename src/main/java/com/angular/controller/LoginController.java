@@ -45,7 +45,7 @@ public class LoginController {
         //System.out.println(user.toString());
         boolean loginResult=false;
         UserEntity users = userService.searchuser(user);
-        if(user!=null){
+        if(users!=null){
         	HttpSession session = request.getSession(true);
             session.setAttribute("name", users.getName());
     		session.setAttribute("id", users.getId());
